@@ -83,6 +83,7 @@ int main(int argc , char * argv[]){
   addr_size = sizeof serverAddr;
   connect(clientSocket, (struct sockaddr *) &serverAddr, addr_size);
 
+
   send(clientSocket,buffer,4,0);
   // recv(clientSocket,buffer,10000,0);
 
@@ -102,6 +103,7 @@ int main(int argc , char * argv[]){
 
   //read(new_sock, &size, sizeof(int));
   for(int i = 0;i<4;i++)
+
   {
     char image_name[10];
     char image_count=0;
