@@ -13,7 +13,7 @@
 
 #define SHELLSCRIPT "\
 #/bin/bash \n\
-firefox file1.html \n\
+rm display.html \n\
 "
 
 
@@ -31,6 +31,8 @@ int main(int argc , char * argv[]){
   int len = strlen(argv[1]);
 
   int i = 0;
+
+  system(SHELLSCRIPT);
 
   while(i<len)
   {
@@ -88,8 +90,6 @@ int main(int argc , char * argv[]){
   HTMLDisplay = fopen("display.html","ab");
   fprintf( HTMLDisplay, "%s\n", "<html>");
   fprintf( HTMLDisplay, "%s\n", "<body>");
-  fprintf( HTMLDisplay, "%s\n", "<table>");
-  fprintf( HTMLDisplay, "%s\n", "<tr>");
   fclose(HTMLDisplay);
 
 
@@ -117,6 +117,29 @@ int main(int argc , char * argv[]){
         strcpy(image_name, "D0.jpg");
         image_count = trucks-'0';
     }
+
+    HTMLDisplay = fopen("display.html","ab");
+
+
+
+    fprintf( HTMLDisplay, "%s\n", "<table>");
+
+    if( i==0 && image_count ){
+      fprintf( HTMLDisplay, "%s\n", " <h1> Cars </h1>");
+    }
+    else if( i==1 && image_count ){
+      fprintf( HTMLDisplay, "%s\n", "<h1> Cats </h1>");
+    }
+    else if( i==2 && image_count ){
+      fprintf( HTMLDisplay, "%s\n", "<h1> Dogs </h1>");
+    }
+    else if( i==3 && image_count ){
+      fprintf( HTMLDisplay, "%s\n", "<h1> Trucks </h1>");
+    }
+
+    fprintf( HTMLDisplay, "%s\n", "<tr>");
+    fclose(HTMLDisplay);
+  
     int j;
     for( j = 0;j<image_count;j++)
     {
@@ -140,7 +163,7 @@ int main(int argc , char * argv[]){
 
           HTMLDisplay = fopen("display.html","ab");
           fprintf( HTMLDisplay, "%s\n", "<td>");
-          fprintf( HTMLDisplay, "<img src=%s>\n", image_name);
+          fprintf( HTMLDisplay, "<img src=%s height=\"500\" width=\"500\">\n", image_name);
           fprintf( HTMLDisplay, "%s\n", "</td>");
           fclose(HTMLDisplay);      
 
