@@ -84,6 +84,14 @@ int main(int argc , char * argv[]){
 
   send(clientSocket,buffer,4,0);  
 
+  FILE *HTMLDisplay;
+  HTMLDisplay = fopen("display.html","ab");
+  fprintf( HTMLDisplay, "%s\n", "<html>");
+  fprintf( HTMLDisplay, "%s\n", "<body>");
+  fprintf( HTMLDisplay, "%s\n", "<table>");
+  fprintf( HTMLDisplay, "%s\n", "<tr>");
+  fclose(HTMLDisplay);
+
   for( i = 0;i<4;i++)
   {
     char image_name[10];
@@ -136,11 +144,22 @@ int main(int argc , char * argv[]){
       fwrite(p_array, 1, sizeof(p_array), image);
       fclose(image);
 
+      HTMLDisplay = fopen("display.html","ab");
+      fprintf( HTMLDisplay, "%s\n", "<td>");
+      fprintf( HTMLDisplay, "<img src=%s/>\n", image_name);
+      fprintf( HTMLDisplay, "%s\n", "</td>");
+      fclose(HTMLDisplay);
+
     }
 
   }
 
+  HTMLDisplay = fopen("display.html","ab");
+  fprintf( HTMLDisplay, "%s\n", "</tr>");
+  fprintf( HTMLDisplay, "%s\n", "</table>");
+  fprintf( HTMLDisplay, "%s\n", "</body>");
+  fprintf( HTMLDisplay, "%s\n", "</head>");
+  fclose(HTMLDisplay);
 
-  
   return 0;
 }
