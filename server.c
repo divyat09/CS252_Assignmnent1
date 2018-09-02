@@ -60,26 +60,26 @@ int main(){
       int i;
       for (i=0;i<4;i++){
 
-        char image_name[10];
+        char image_name[20];
         int image_count=0;
         if(i==0)
         {
-            strcpy(image_name, "A0.jpg");
+            strcpy(image_name, "./images/A0.jpg");
             image_count = buffer[0]-'0' ;
         }
         if(i==1)
         {
-            strcpy(image_name, "B0.jpg");
+            strcpy(image_name, "./images/B0.jpg");
             image_count = buffer[1]-'0';
         }
         if(i==2)
         {
-            strcpy(image_name, "C0.jpg");
+            strcpy(image_name, "./images/C0.jpg");
             image_count = buffer[2]-'0';
         }
         if(i==3)
         {
-            strcpy(image_name, "D0.jpg");
+            strcpy(image_name, "./images/D0.jpg");
             image_count = buffer[3]-'0';
         }
 
@@ -89,7 +89,7 @@ int main(){
         int j;
         for( j = 0;j<image_count;j++)
         {
-          image_name[1]++;
+          image_name[10]++;
 
         // while(x>0){
           // printf("%d %d\n",x, i);

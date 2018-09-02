@@ -90,22 +90,22 @@ int main(int argc , char * argv[]){
     int image_count=0;
     if(i==0)
     {
-        strcpy(image_name, "A0.jpeg");
+        strcpy(image_name, "A0.jpg");
         image_count = cars-'0';
     }
     if(i==1)
     {
-        strcpy(image_name, "B0.jpeg");
+        strcpy(image_name, "B0.jpg");
         image_count = cats-'0';
     }
     if(i==2)
     {
-        strcpy(image_name, "C0.jpeg");
+        strcpy(image_name, "C0.jpg");
         image_count = dogs-'0';
     }
     if(i==3)
     {
-        strcpy(image_name, "D0.jpeg");
+        strcpy(image_name, "D0.jpg");
         image_count = trucks-'0';
     }
     int j;
