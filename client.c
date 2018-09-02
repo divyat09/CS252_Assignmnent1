@@ -74,7 +74,7 @@ int main(int argc , char * argv[]){
   /* Set port number, using htons function to use proper byte order */
   serverAddr.sin_port = htons(5432);
   /* Set IP address to localhost */
-  serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+  serverAddr.sin_addr.s_addr = inet_addr("0.0.0.0");
    // Set all bits of the padding field to 0 
   memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);
 
@@ -91,6 +91,7 @@ int main(int argc , char * argv[]){
   fprintf( HTMLDisplay, "%s\n", "<table>");
   fprintf( HTMLDisplay, "%s\n", "<tr>");
   fclose(HTMLDisplay);
+
 
   for( i = 0;i<4;i++)
   {
@@ -120,35 +121,31 @@ int main(int argc , char * argv[]){
     for( j = 0;j<image_count;j++)
     {
 
-      int size;
-      image_name[1]++;
-      num= recv(clientSocket, &size, sizeof(int), 0);
-      if(num<=0){
-        printf("Network Error\n");
-        break;
-      }
-       //printf("Buffer Value %s\n",buffer);
-      // = atoi(buffer);
-      //Read Picture Byte Array
-      printf("Reading Picture Byte Array\n");
-      printf("Size: %d\n",size);
-      char p_array[size];
-      //read(new_sock, p_array, size);
-      recv(clientSocket, p_array, size, 0);
-      printf("Content: %s\n",p_array);
-      //Convert it Back into Picture
-      printf("Converting Byte Array to Picture\n");
-      FILE *image;
-      printf("%s\n", image_name);
-      image = fopen(image_name, "wb");
-      fwrite(p_array, 1, sizeof(p_array), image);
-      fclose(image);
+          image_name[1]++;
 
-      HTMLDisplay = fopen("display.html","ab");
-      fprintf( HTMLDisplay, "%s\n", "<td>");
-      fprintf( HTMLDisplay, "<img src=%s/>\n", image_name);
-      fprintf( HTMLDisplay, "%s\n", "</td>");
-      fclose(HTMLDisplay);
+          char p_array[MAXSIZE];
+          num= recv(clientSocket, p_array, MAXSIZE, 0);
+          if(num<=0){
+            printf("Network Error: Not able to Receive Image\n");
+            break;
+          }
+          p_array[num] = '\0';
+          printf("Image Recevied");
+
+          FILE *image;
+          printf("%s\n", image_name);
+          image = fopen(image_name, "wb");
+          fwrite(p_array, 1, sizeof(p_array), image);
+          fclose(image);
+
+          HTMLDisplay = fopen("display.html","ab");
+          fprintf( HTMLDisplay, "%s\n", "<td>");
+          fprintf( HTMLDisplay, "<img src=%s>\n", image_name);
+          fprintf( HTMLDisplay, "%s\n", "</td>");
+          fclose(HTMLDisplay);      
+
+          int i[1]={0};
+          send(clientSocket, i, sizeof(int), 0);  
 
     }
 
