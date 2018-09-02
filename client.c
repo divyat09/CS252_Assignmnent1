@@ -16,6 +16,11 @@
 rm display.html \n\
 "
 
+#define LAUNCH "\
+#/bin/bash \n\
+firefox display.html \n\
+"
+
 
 int main(int argc , char * argv[]){
   int clientSocket, num;
@@ -163,7 +168,7 @@ int main(int argc , char * argv[]){
 
           HTMLDisplay = fopen("display.html","ab");
           fprintf( HTMLDisplay, "%s\n", "<td>");
-          fprintf( HTMLDisplay, "<img src=%s height=\"500\" width=\"500\">\n", image_name);
+          fprintf( HTMLDisplay, "<img src=%s height=\"300\" width=\"300\">\n", image_name);
           fprintf( HTMLDisplay, "%s\n", "</td>");
           fclose(HTMLDisplay);      
 
@@ -181,5 +186,6 @@ int main(int argc , char * argv[]){
   fprintf( HTMLDisplay, "%s\n", "</head>");
   fclose(HTMLDisplay);
 
+  system(LAUNCH);
   return 0;
 }
