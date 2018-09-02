@@ -44,7 +44,7 @@ int main(){
   //printf("Data received: %s\n",buffer);
   printf("Enter file to be read\n");
   scanf("%s",file_name);
-  send(clientSocket, file_name, 50, 0);
+  send(clientSocket, "3214", 4, 0);
   recv(clientSocket, buffer, 1024, 0);
   printf("Data received: %s\n",buffer);
   FILE *fp = fopen("temp.html", "w+");
