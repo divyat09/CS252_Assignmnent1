@@ -8,8 +8,7 @@
 #include <netinet/in.h>
 #include <string.h>
 #include <arpa/inet.h>
-
-
+#define MAXSIZE 102400
 
 
 #define SHELLSCRIPT "\
@@ -19,8 +18,9 @@ firefox file1.html \n\
 
 
 int main(int argc , char * argv[]){
-  int clientSocket;
+  int clientSocket, num;
   char buffer[1024];
+  char filedata[MAXSIZE];
   struct sockaddr_in serverAddr;
   socklen_t addr_size;
 
@@ -83,16 +83,21 @@ int main(int argc , char * argv[]){
   connect(clientSocket, (struct sockaddr *) &serverAddr, addr_size);
 
   send(clientSocket,buffer,4,0);
-  recv(clinetSocket,buffer,1024,0);
 
-
+  num = recv(clientSocket, filedata, sizeof(filedata), 0);
+  if(num<=0){
+    printf("Network Error\n");
+    exit(-1);
+  }
+  filedata[num] = '\0';
 
   FILE *fptr;
-  fptr = fopen("file1.html","w");
-  fwrite(buffer, sizeof(buffer[0]), 100, fptr);
+  fptr = fopen("file1.jpeg","w+");
+  fwrite(filedata, 1, strlen(filedata), fptr);
   fclose(fptr);
+  printf(" Data: %s", filedata);
 
-  system(SHELLSCRIPT);
+  // system(SHELLSCRIPT);
 
   /*---- Read the message from the server into the buffer ----*/
   // recv(clientSocket, buffer, 1024, 0);

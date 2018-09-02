@@ -7,22 +7,13 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#define MAXSIZE 102400
 
-char *strlwr(char *str)
-{
-  unsigned char *p = (unsigned char *)str;
-
-  while (*p) {
-     *p = tolower((unsigned char)*p);
-      p++;
-  }
-
-  return str;
-}
 
 int main(){
   int welcomeSocket, newSocket, num;
   char buffer[1024];
+  char filedata[MAXSIZE];
   struct sockaddr_in serverAddr;
   struct sockaddr_storage serverStorage;
   socklen_t addr_size;
@@ -57,7 +48,7 @@ int main(){
 
     while(1){
       // /*---- Listen on the socket, with 5 max connection requests queued ----*/
-      num= recv(newSocket, buffer, 1024,0);
+      num= recv(newSocket, buffer, 4,0);
       if(num<=0){
         printf("Network Error\n");
         break;
@@ -69,9 +60,10 @@ int main(){
       /*---- Send message to the socket of the incoming connection ----*/
       // strcpy(buffer,"Hello World\n");
 
-      FILE *fd = fopen("images/Car1.jpg", "rb");
+      FILE *fd = fopen("Car1.jpeg", "rb");
       fread(filedata, 1, MAXSIZE, fd);
       fclose(fd);
+      printf(" Data being sent: %s", filedata);
 
       if (( send(newSocket, filedata, strlen(filedata), 0) )== -1) {
           fprintf(stderr, "Failure Sending Message\n");
