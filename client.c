@@ -14,6 +14,7 @@
 #define SHELLSCRIPT "\
 #/bin/bash \n\
 rm display.html \n\
+rm *.jpg \n\
 "
 
 #define LAUNCH "\
@@ -38,7 +39,11 @@ int main(int argc , char * argv[]){
   int i = 0;
 
   system(SHELLSCRIPT);
-
+  // The server recieves 4 bits each bit represents number of images of each category.
+  // bit 0 represents no of cars.
+  // bit 1 represents no of cats.
+  // bit 2 represents no of dogs.
+  // bit 3 represents no of trucks.                                   
   while(i<len)
   {
      if(argv[1][i]-'0'>=0 && argv[1][i]-'0'<=4)
@@ -91,6 +96,9 @@ int main(int argc , char * argv[]){
 
   send(clientSocket,buffer,4,0);  
 
+
+  // Here the html file is written with the c program itself.
+
   FILE *HTMLDisplay;
   HTMLDisplay = fopen("display.html","ab");
   fprintf( HTMLDisplay, "%s\n", "<html>");
@@ -98,10 +106,15 @@ int main(int argc , char * argv[]){
   fclose(HTMLDisplay);
 
 
+  // both the client and the server know the count of each category.
+  //Hence we loop over each category and recieve the required images and then insert images into the html file dynamically.
+
+
   for( i = 0;i<4;i++)
   {
     char image_name[10];
     int image_count=0;
+
     if(i==0)
     {
         strcpy(image_name, "A0.jpg");
@@ -152,6 +165,8 @@ int main(int argc , char * argv[]){
           image_name[1]++;
 
           char p_array[MAXSIZE];
+
+          // recieving images from server
           num= recv(clientSocket, p_array, MAXSIZE, 0);
           if(num<=0){
             printf("Network Error: Not able to Receive Image\n");
@@ -160,11 +175,16 @@ int main(int argc , char * argv[]){
           p_array[num] = '\0';
           printf("Image Recevied");
 
+
+          // converting the recieved images into image file in jpg format.
+
           FILE *image;
           printf("%s\n", image_name);
           image = fopen(image_name, "wb");
           fwrite(p_array, 1, sizeof(p_array), image);
           fclose(image);
+
+          // inserting the images into html.
 
           HTMLDisplay = fopen("display.html","ab");
           fprintf( HTMLDisplay, "%s\n", "<td>");

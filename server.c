@@ -49,8 +49,9 @@ int main(){
     newSocket = accept(welcomeSocket, (struct sockaddr *) &serverStorage, &addr_size);
 
     while(1){
-      // /*---- Listen on the socket, with 5 max connection requests queued ----*/
+      //Reciveing the infrormation about count of each category
       num= recv(newSocket, buffer, 4,0);
+
       if(num<=0){
         printf("Connection Closed\n");
         break;
@@ -59,6 +60,8 @@ int main(){
       printf("Query Recevied: %s\n", buffer );
 
       int i;
+
+      // looping over each category and sending each image.
       for (i=0;i<4;i++){
 
         char image_name[20];
@@ -100,8 +103,11 @@ int main(){
 
           //Send Picture as Byte Array
           char send_buffer[MAXSIZE];
+          // Reading  the image to buffer
           fread(send_buffer, 1, sizeof(send_buffer), picture);
           printf("%s",send_buffer);
+
+          // Sending the image to client
 
           if (( send(newSocket,send_buffer, sizeof(send_buffer),0) )== -1) {
               fprintf(stderr, "Failure Sending Data Message\n");
