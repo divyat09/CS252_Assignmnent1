@@ -8,8 +8,7 @@
 #include <netinet/in.h>
 #include <string.h>
 #include <arpa/inet.h>
-
-
+#define MAXSIZE 102400
 
 
 #define SHELLSCRIPT "\
@@ -19,9 +18,9 @@ firefox file1.html \n\
 
 
 int main(int argc , char * argv[]){
-  int clientSocket;
+  int clientSocket, num;
   char buffer[1024];
-  // char image[102400]
+  char filedata[MAXSIZE];
   struct sockaddr_in serverAddr;
   socklen_t addr_size;
 
@@ -83,69 +82,57 @@ int main(int argc , char * argv[]){
   addr_size = sizeof serverAddr;
   connect(clientSocket, (struct sockaddr *) &serverAddr, addr_size);
 
+  send(clientSocket,buffer,4,0);  
 
-  send(clientSocket,buffer,4,0);
-  // recv(clientSocket,buffer,10000,0);
-
-
-  // printf("Enter file to be read\n");
-  // scanf("%s",file_name);
-  // send(clientSocket, file_name, 50, 0);
-  // recv(clientSocket, buffer, 1024, 0);
-  // printf("Data received: %s\n",buffer);
-  // FILE *fp = fopen("temp.html", "w+");
-  // if (fp != NULL)
-  // {
-  //     fputs(buffer, fp);
-  //     fclose(fp);
-  // }  
-  // printf("Reading Picture Size\n");
-
-  //read(new_sock, &size, sizeof(int));
-  for(int i = 0;i<4;i++)
-
+  for( i = 0;i<4;i++)
   {
     char image_name[10];
-    char image_count=0;
+    int image_count=0;
     if(i==0)
     {
-        image_name="A0.jpeg";
+        strcpy(image_name, "A0.jpeg");
         image_count = cars-'0';
     }
     if(i==1)
     {
-        image_name="B0.jpeg";
+        strcpy(image_name, "B0.jpeg");
         image_count = cats-'0';
     }
     if(i==2)
     {
-        image_name="C0.jpeg";
+        strcpy(image_name, "C0.jpeg");
         image_count = dogs-'0';
     }
     if(i==3)
     {
-        image_name="D0.jpeg";
+        strcpy(image_name, "D0.jpeg");
         image_count = trucks-'0';
     }
-    for(int j = 0;j<image_count;j++)
+    int j;
+    for( j = 0;j<image_count;j++)
     {
 
-      image_name[1]+=j;
       int size;
-      recv(clientSocket, &size, sizeof(int), 0);
-      //printf("Buffer Value %s\n",buffer);
+      image_name[1]++;
+      num= recv(clientSocket, &size, sizeof(int), 0);
+      if(num<=0){
+        printf("Network Error\n");
+        break;
+      }
+       //printf("Buffer Value %s\n",buffer);
       // = atoi(buffer);
       //Read Picture Byte Array
       printf("Reading Picture Byte Array\n");
-      printf("Size: %d",size);
+      printf("Size: %d\n",size);
       char p_array[size];
       //read(new_sock, p_array, size);
       recv(clientSocket, p_array, size, 0);
-      printf("Content%s",p_array);
+      printf("Content: %s\n",p_array);
       //Convert it Back into Picture
       printf("Converting Byte Array to Picture\n");
       FILE *image;
-      image = fopen("c1.jpg", "w");
+      printf("%s\n", image_name);
+      image = fopen(image_name, "wb");
       fwrite(p_array, 1, sizeof(p_array), image);
       fclose(image);
 
