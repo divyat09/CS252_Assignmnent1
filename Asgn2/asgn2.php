@@ -47,8 +47,18 @@ By Id: <input type="text" name="emp_id"> By Last Name: <input type="text" name="
 </form>
 <form action="back_2.php" method="post">
 <h3> To get count of  employees in a department </h3>
+Department: <input type="text" name="dep_id">
+<input type="submit" name="submit">
+</form>
+
+<form action="back_3.php" method="post">
+<h3> Get count of   employees in  the largest department </h3>
 
 <input type="submit" name="submit">
+
+
+
+
 </form>
 <form action="mypage.php" method="post">
 <h3> To get gender ratio of a department </h3>

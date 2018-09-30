@@ -30,7 +30,9 @@ tr:nth-child(even) {
 
 
 <?php
-$dep_id = $_POST["dep_id"];
+
+
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -43,7 +45,8 @@ if ($conn->connect_error) {
 }
 
 
-$sql = "SELECT COUNT(emp_no) as cont, dept_no FROM dept_emp WHERE dept_no=\"$dep_id\" GROUP BY dept_no ORDER BY COUNT(emp_no) DESC LIMIT 1 ";
+
+$sql = "SELECT COUNT(emp_no) as cont, dept_no FROM dept_emp  GROUP BY dept_no ORDER BY COUNT(emp_no) DESC LIMIT 1 ";
 $result = $conn->query($sql);
 
 
