@@ -7,8 +7,8 @@
 <h1>Employees database</h1>
 <?php
 	$servername = "localhost";
-	$username = "root";
-	$password = "";
+	$username = "test_user";
+	$password = "pass";
 	$db = "employees";
 	// Create connection
 	$conn = mysqli_connect($servername, $username, $password, $db);
@@ -60,12 +60,12 @@ Department: <input type="text" name="dep_id">
 
 
 </form>
-<form action="mypage.php" method="post">
+<form action="asgn2.php" method="post">
 <h3> To get gender ratio of a department </h3>
 Enter Department Name <input type="text" name="deptname">
 <input type="submit" name="submit1">
 </form>
-<form action="mypage.php" method="post">
+<form action="asgn2.php" method="post">
 <h3> To get gender pay ratio of a department </h3>
 Enter Department Name <input type="text" name="deptname">
 <input type="submit" name="submit2">
