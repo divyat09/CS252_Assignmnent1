@@ -30,7 +30,42 @@ tr:nth-child(even) {
 
 
 <?php
-$dep_id = $_POST["dep_id"];
+
+
+$dep = $_POST["dep_id"];
+
+$dep_id;
+
+if($dep == "Customer Service")
+$dep_id = "d001";
+if($dep == "Development")
+$dep_id = "d002";
+if($dep == "Finance")
+$dep_id = "d003";
+if($dep == "Human Resources")
+$dep_id = "d004";
+if($dep == "Marketing")
+$dep_id = "d005";
+if($dep == "Production")
+$dep_id = "d006";
+if($dep == "Quality Management")
+$dep_id = "d007";
+if($dep == "Research")
+$dep_id = "d008";
+if($dep == "Sales")
+$dep_id = "d009";
+
+
+
+
+
+
+
+
+
+
+
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -41,6 +76,7 @@ $conn = mysqli_connect($servername, $username, $password, $db);
 if ($conn->connect_error) {
  die("Connection failed: " . $conn->connect_error);
 }
+
 
 
 $sql = "SELECT COUNT(emp_no) as cont, dept_no FROM dept_emp WHERE dept_no=\"$dep_id\" GROUP BY dept_no ORDER BY COUNT(emp_no) DESC LIMIT 1 ";

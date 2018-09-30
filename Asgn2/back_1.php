@@ -4,7 +4,29 @@
 <?php
 
 $emp_id = $_POST["emp_id"];
-$dep_id = $_POST["dep_id"];
+$dep = $_POST["dep_id"];
+
+$dep_id;
+
+if($dep == "Customer Service")
+$dep_id = "d001";
+if($dep == "Development")
+$dep_id = "d002";
+if($dep == "Finance")
+$dep_id = "d003";
+if($dep == "Human Resources")
+$dep_id = "d004";
+if($dep == "Marketing")
+$dep_id = "d005";
+if($dep == "Production")
+$dep_id = "d006";
+if($dep == "Quality Management")
+$dep_id = "d007";
+if($dep == "Research")
+$dep_id = "d008";
+if($dep == "Sales")
+$dep_id = "d009";
+
 $last_name = $_POST["last_name"];
 $flag1=0;
 $flag2=0;
@@ -89,7 +111,7 @@ if ($result->num_rows > 0) {
     // output data of each row
     $flag=1;
     while($row = $result->fetch_assoc()) {
-       
+
         ?>
     <tr>
       <td> <?php echo $row["emp_no"] ; ?>  </td>
@@ -98,7 +120,7 @@ if ($result->num_rows > 0) {
       <td> <?php echo  $row["last_name"] ; ?> </td>
       <td> <?php echo $row["gender"] ; ?>  </td>
       <td> <?php echo  $row["hire_date"] ; ?> </td>
-    </tr> 
+    </tr>
     <?php
 
     }
@@ -122,7 +144,7 @@ if ($result->num_rows > 0) {
       <td> <?php echo  $row["last_name"] ; ?> </td>
       <td> <?php echo $row["gender"] ; ?>  </td>
       <td> <?php echo  $row["hire_date"] ; ?> </td>
-    </tr> 
+    </tr>
     <?php
     }
 }
@@ -146,7 +168,7 @@ if ($result->num_rows > 0) {
       <td> <?php echo  $row["last_name"] ; ?> </td>
       <td> <?php echo $row["gender"] ; ?>  </td>
       <td> <?php echo  $row["hire_date"] ; ?> </td>
-    </tr> 
+    </tr>
     <?php
     }
 }
@@ -170,7 +192,7 @@ if ($result->num_rows > 0) {
       <td> <?php echo  $row["last_name"] ; ?> </td>
       <td> <?php echo $row["gender"] ; ?>  </td>
       <td> <?php echo  $row["hire_date"] ; ?> </td>
-    </tr> 
+    </tr>
     <?php
     }
 }
@@ -194,7 +216,7 @@ if ($result->num_rows > 0) {
       <td> <?php echo  $row["last_name"] ; ?> </td>
       <td> <?php echo $row["gender"] ; ?>  </td>
       <td> <?php echo  $row["hire_date"] ; ?> </td>
-    </tr> 
+    </tr>
     <?php
     }
 }
@@ -218,7 +240,7 @@ if ($result->num_rows > 0) {
       <td> <?php echo  $row["last_name"] ; ?> </td>
       <td> <?php echo $row["gender"] ; ?>  </td>
       <td> <?php echo  $row["hire_date"] ; ?> </td>
-    </tr> 
+    </tr>
     <?php
     }
 }
@@ -243,7 +265,7 @@ if ($result->num_rows > 0) {
       <td> <?php echo  $row["last_name"] ; ?> </td>
       <td> <?php echo $row["gender"] ; ?>  </td>
       <td> <?php echo  $row["hire_date"] ; ?> </td>
-    </tr> 
+    </tr>
     <?php
     }
 }
@@ -262,7 +284,7 @@ if($flag==0)
       <td> <?php echo "invalid" ; ?> </td>
       <td> <?php echo "invalid" ; ?>  </td>
       <td> <?php echo "invalid" ; ?> </td>
-    </tr> 
+    </tr>
     <?php
 }
 
