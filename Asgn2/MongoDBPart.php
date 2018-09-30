@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>U.P. Police FIR Data</h1>
+
 <?php
 
 try {
@@ -28,23 +33,29 @@ try {
         }
     }        
 
-    $Max=0;
-    $DistrictRes;
-    foreach( $DistrictArr as $key => $value ){
-        if($Max<$value){
-            $Max= $value;
-            $DistrictRes= $key;
-        }
-        #echo $key;
-        #echo " : ";
-        #echo $value;
-        #echo "\n";
-    }
+    // $Max=0;
+    // $DistrictRes;
+    // foreach( $DistrictArr as $key => $value ){
+    //     if($Max<$value){
+    //         $Max= $value;
+    //         $DistrictRes= $key;
+    //     }
+    //     #echo $key;
+    //     #echo " : ";
+    //     #echo $value;
+    //     #echo "\n";
+    // }
 
+    $Max=max($DistrictArr);
+    $DistrictRes= array_search( max($DistrictArr), $DistrictArr); 
+    echo "<h3> Most crime per capita </h3>";
     # Answer
-    echo " District that has the most crime reported per capita : ";
-    echo $DistrictRes; 
-    echo "\n";
+    echo "<p>";
+    echo $DistrictRes;
+    echo " District leads in crime in per capita cateogry with  "; 
+    echo $Max;
+    echo " cases reported ";
+    echo "<p>";
 
 
     # TASK 2
@@ -64,23 +75,16 @@ try {
         }
     }        
 
-    $Max=0;
-    $PSRes;
-    foreach( $PSArr as $key => $value ){
-        if($Max<$value){
-            $Max= $value;
-            $PSRes= $key;
-        }
-        #echo $key;
-        #echo " : ";
-        #echo $value;
-        #echo "\n";
-    }
+    $Max=max($PSArr);
+    $PSRes= array_search( max($PSArr), $PSArr); 
+    echo "<h3> Most inefficient in completing investigations </h3>";
+    echo "<p>";
+    echo $PSRes;
+    echo " Police Station that is the most inefficient in completing investigations with a total of   "; 
+    echo $Max;
+    echo " cases pending ";
+    echo "<p>";
 
-    # Answer
-    echo "Police Station that is the most inefficient in completing investigations: ";
-    echo $PSRes; 
-    echo "\n";
 
 
     # TASK 3
@@ -107,31 +111,36 @@ try {
         }        
     }
 
-    $Max=0;
-    $Min=0;
-    $MaxRepLaw;
-    $MinRepLaw;
+    echo "<h3> Most Reported Crime Laws</h3>";
 
-    foreach( $LawsArr as $key => $value ){
-        
-        if($Max<$value){
-            $Max= $value;
-            $MaxRepLaw= $key;
-        }
+    $Max=max($LawsArr);
+    $MaxRepLaw= array_search( max($LawsArr), $LawsArr); 
 
-        #echo $key;
-        #echo " : ";
-        #echo $value;
-        #echo "\n";
-
-    }
-
-    # Answer
-    echo "crime laws that are most uniquely applied in FIRs :";
+    echo "<p>";
     echo $MaxRepLaw; 
-    echo "\n";
-    #echo $Max; 
-    #echo "\n";
+    echo " is the most reported crime law, total of ";
+    echo $Max;
+    echo " FIR applications have reported it so far " ;
+    echo "<p>";
+
+    echo "<h3> Least Reported Crime Laws</h3>";
+
+    $Min=min($LawsArr);
+    $MinRepLaw= array_keys( $LawsArr, min($LawsArr)); 
+
+    echo "<p>";
+    echo " The following are the least reported crime laws, only them occur in only  ";
+    echo $Min;
+    echo " FIR application each" ;
+    echo "<ul>";
+    foreach($MinRepLaw as $Key){
+            echo "<li>";
+            echo $Key;
+            echo "</li>";
+    }
+    echo "</ul>";
+    echo "<p>";
+
 
 
 } catch (MongoDB\Driver\Exception\Exception $e) {
@@ -147,3 +156,6 @@ try {
 }
 
 ?>
+
+</body>
+</html>
