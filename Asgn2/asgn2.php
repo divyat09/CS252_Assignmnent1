@@ -92,7 +92,7 @@ Enter Department Name <input type="text" name="deptname">
 			$result1 = $conn->query($sql1);
 			echo "<h4>",$_POST["deptname"],"</h4>";
 			echo "<table><tr><th>Number of Males</th><th>Number of Females</th></tr>";
-			echo "<tr><td>", $result->fetch_assoc()["males"],"</td><td>",$result1->fetch_assoc()["females"]."</td><td>",$_POST["deptname"],"</td></tr>";
+			echo "<tr><td>", $result->fetch_assoc()["males"],"</td><td>",$result1->fetch_assoc()["females"],"</td></tr>";
 		}else{
 			echo "No such department";
 		}
