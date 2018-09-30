@@ -8,7 +8,7 @@
 <?php
 	$servername = "localhost";
 	$username = "root";
-	$password = "*************";
+	$password = "";
 	$db = "employees";
 	// Create connection
 	$conn = mysqli_connect($servername, $username, $password, $db);
@@ -20,7 +20,7 @@
 	$sql = 'SELECT * FROM departments';
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) {
-		echo "The various departments are <ul>"; 
+		echo "The various departments are <ul>";
 		while($row = $result->fetch_assoc()) {
 			echo "<li>", $row["dept_name"],"</li>";
 		}
@@ -31,7 +31,7 @@
 	$sql = 'SELECT DISTINCT title FROM titles';
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) {
-		echo "The various titles are <ul>"; 
+		echo "The various titles are <ul>";
 		while($row = $result->fetch_assoc()) {
 			echo "<li>", $row["title"],"</li>";
 		}
@@ -40,9 +40,9 @@
 		echo "Connection to database failed";
 	}
 ?>
-<form action="mypage.php" method="post">
+<form action="back_1.php" method="post">
 <h3> Search for employee </h3>
-By Id: <input type="text" name="id"> By Last Name: <input type="text" name="lname"> By Department: <input type="text" name="dept">
+By Id: <input type="text" name="emp_id"> By Last Name: <input type="text" name="last_name"> By Department: <input type="text" name="dep_id">
 <input type="submit" name="submit4">
 </form>
 <form action="mypage.php" method="post">
@@ -66,7 +66,7 @@ Enter Department Name <input type="text" name="deptname">
 		$result = $conn->query($sql);
 		$x = $result->fetch_assoc()["dept_no"];
 		if ($result->num_rows > 0) {
-			$sql = 'SELECT * FROM employees WHERE emp_no IN (SELECT emp_no FROM dept_emp WHERE dept_no="'. $x .'") ORDER BY hire_date'; 
+			$sql = 'SELECT * FROM employees WHERE emp_no IN (SELECT emp_no FROM dept_emp WHERE dept_no="'. $x .'") ORDER BY hire_date';
 			$result = $conn->query($sql);
 			echo "<table><tr><th>Employee ID</th><th>Name</th><th>Start Date</th></tr>";
 			if ($result->num_rows > 0) {
@@ -80,14 +80,14 @@ Enter Department Name <input type="text" name="deptname">
 		}else{
 			echo "No such department";
 		}
-	}				
+	}
 	if(isset($_POST["submit1"])){
 		$sql = 'SELECT dept_no FROM departments WHERE dept_name="' . $_POST["deptname"] . '"';
 		$result = $conn->query($sql);
 		$x = $result->fetch_assoc()["dept_no"];
 		if ($result->num_rows > 0) {
-			$sql = 'SELECT count(*) AS males FROM employees WHERE emp_no IN (SELECT emp_no FROM dept_emp WHERE dept_no="'. $x .'") AND gender="M"'; 
-			$sql1 = 'SELECT count(*) AS females FROM employees WHERE emp_no IN (SELECT emp_no FROM dept_emp WHERE dept_no="'. $x .'") AND gender="F"'; 
+			$sql = 'SELECT count(*) AS males FROM employees WHERE emp_no IN (SELECT emp_no FROM dept_emp WHERE dept_no="'. $x .'") AND gender="M"';
+			$sql1 = 'SELECT count(*) AS females FROM employees WHERE emp_no IN (SELECT emp_no FROM dept_emp WHERE dept_no="'. $x .'") AND gender="F"';
 			$result = $conn->query($sql);
 			$result1 = $conn->query($sql1);
 			echo "<h4>",$_POST["deptname"],"</h4>";
@@ -96,13 +96,13 @@ Enter Department Name <input type="text" name="deptname">
 		}else{
 			echo "No such department";
 		}
-	}	
+	}
 	if(isset($_POST["submit2"])){
 		$sql = 'SELECT dept_no FROM departments WHERE dept_name="' . $_POST["deptname"] . '"';
 		$result = $conn->query($sql);
 		$x = $result->fetch_assoc()["dept_no"];
 		if ($result->num_rows > 0) {
-			$sql = 'SELECT DISTINCT title FROM titles WHERE emp_no IN (SELECT emp_no FROM dept_emp WHERE dept_no="'. $x .'")'; 
+			$sql = 'SELECT DISTINCT title FROM titles WHERE emp_no IN (SELECT emp_no FROM dept_emp WHERE dept_no="'. $x .'")';
 			$result = $conn->query($sql);
 			echo "<h3>Gende Pay Ratio</h3><table border='1'><th>Title</th><th>Male salry</th><th>Female Salary</th>";
 			while ($row = $result->fetch_assoc()){
@@ -138,7 +138,7 @@ Enter Department Name <input type="text" name="deptname">
 				echo $dname;
 				echo "<tr><td>",$row["emp_no"],"</td><td>",$row[first_name]," ",$row[last_name],"</td><td>",$row["hire_date"],"</td><td>",$dname,"</td></tr>";
 			}
-			
+
 		}
 		if ($_POST["dept"] != ""){
 			$sql = 'SELECT dept_no FROM departments WHERE dept_name="' . $_POST["dept"] . '"';
@@ -164,7 +164,7 @@ Enter Department Name <input type="text" name="deptname">
 			}
 		}
 		echo "</table";
-	}	
+	}
 	$conn->close();
 ?>
 
