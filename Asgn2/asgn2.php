@@ -45,9 +45,9 @@
 By Id: <input type="text" name="emp_id"> By Last Name: <input type="text" name="last_name"> By Department: <input type="text" name="dep_id">
 <input type="submit" name="submit4">
 </form>
-<form action="mypage.php" method="post">
-<h3> To get information on employees in a department </h3>
-Enter Department Name <input type="text" name="deptname">
+<form action="back_2.php" method="post">
+<h3> To get count of  employees in a department </h3>
+
 <input type="submit" name="submit">
 </form>
 <form action="mypage.php" method="post">
