@@ -2,7 +2,7 @@ Start a new ionic project :
 ionic start <project name> sidemenu
 
 cd into the project
-Replace the src and resources folders with the ones given in this repository
+Replace the src and resources folders with the ones given in this repository <br />
 Add geolocation:
 ionic cordova plugin add cordova-plugin-geolocation --variable GEOLOCATION_USAGE_DESCRIPTION="To locate you"
 npm install --save @ionic-native/geolocation
