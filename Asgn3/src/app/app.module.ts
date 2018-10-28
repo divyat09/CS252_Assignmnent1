@@ -10,7 +10,7 @@ import { NewPlacePage } from '../pages/new-place/new-place';
 import { PlacesService } from '../services/places.services';
 import { Geolocation } from '@ionic-native/geolocation';
 import { MapPage } from '../pages/map/map';
-import { AgmCoreModule } from '@agm/core';
+
 
 @NgModule({
   declarations: [
@@ -21,10 +21,7 @@ import { AgmCoreModule } from '@agm/core';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAGC0Sf6qu7UVDe9gY5AgkMt7qFHgqyJCI' 
-    })
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
