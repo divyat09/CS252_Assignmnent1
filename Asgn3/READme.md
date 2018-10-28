@@ -1,5 +1,6 @@
 Start a new ionic project :
 ionic start <project name> sidemenu
+  
 
 cd into the project
 Replace the src and resources folders with the ones given in this repository
