@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons>
+      <button ion-button icon-only (click)="Login()" tooltip="Log In" navTooltip [event]="tooltipEvent" [duration]="duration">
+        <ion-icon name="log-in"> </ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="LoadNewPlace()" tooltip="Add your location" navTooltip [event]="tooltipEvent" [duration]="duration">
+        <ion-icon name="add"> </ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      My places
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <button block ion-button (click)="Login()" item-left> Sign In </button>
+  <button block ion-button (click)="Register()" item-left> Register </button>
+  <h3>Current Latitude: {{ locationTracker.lat }}</h3>
+  <h3>Current Longitude: {{ locationTracker.lng }}</h3>
+  <!-- <button ion-button full primary (click)="start()">Start Tracking</button>
+  <button ion-button full primary (click)="stop()">Stop Tracking</button> -->
+  <!-- <button (click)="LoadNewPlace()" ion-button> Add Place</button> -->
+  <ion-list>
+    <ion-item *ngFor="let place of places" (click) = "openmap(place)"> {{ place.train_no }} {{place.location.lat }} </ion-item>
+  </ion-list>
+</ion-content>
